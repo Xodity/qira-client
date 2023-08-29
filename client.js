@@ -19,6 +19,6 @@ const dataFilePath = 'authentication_data.json';
     } catch (error) {
         console.log('Cookies Token not found in authentication json please login');
     }
-    validate.clienrt(userData)
-    userData.connectSid && userData.rememberMe ? await framework.HookAuth(userData,rl,dataFilePath,framework) : null ;
+    validate.clienrt(userData, rl, dataFilePath, framework, puppeteer, fs)
+    userData.connectSid && userData.rememberMe ? await framework.HookAuth(userData, rl, dataFilePath, framework, puppeteer, fs) : null ;
 })();

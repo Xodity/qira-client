@@ -1,5 +1,3 @@
-const puppeteer = require("puppeteer");
-const fs = require("fs");
 module.exports = {
     RunServer : async function (page) {
         console.log('Waiting for button server to be loaded...');
@@ -8,7 +6,7 @@ module.exports = {
         console.log('Client bot is ready without anti afk. Happy hacking!');
         await page.click('.btn.btn-lg.btn-success.text-ellipsis.flex-grow-1');
     },
-    HookAuth : async function (userData,rl,dataFilePath,framework) {
+    HookAuth : async function (userData, rl, dataFilePath, framework, puppeteer, fs) {
 
             console.log('Data cookies founded: ' , userData);
             const client = await puppeteer.launch({

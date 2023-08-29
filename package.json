@@ -1,6 +1,6 @@
 {
   "name": "qira-client",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "qira-client providing, scraping, and reclient with chrome or chromium",
   "main": "client.js",
   "scripts": {

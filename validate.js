@@ -1,5 +1,5 @@
 module.exports = {
-    clienrt : async function(userData) {
+    clienrt : async function(userData, rl, dataFilePath, framework, puppeteer, fs) {
         if (!userData.connectSid && !userData.rememberMe) {
             console.log('Please login first to validating and saving your cookies auth');
             const client = await puppeteer.launch({
@@ -10,12 +10,13 @@ module.exports = {
             const pages = await client.pages();
             const page = pages[0];
 
-            await page.goto('https://pony.town');
+            await page.goto('https://pony.town', { timeout: 60000 });
             console.log('U can login now. if done u can press Enter to Continue..');
 
             await new Promise((resolve) => {
                 rl.once('line', () => {
                     resolve();
+                    rl.close();
                 });
             });
             await page.waitForTimeout(10000);
