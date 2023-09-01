@@ -3,7 +3,7 @@ const readline = require('readline');
 const fs = require('fs');
 const validate = require('./validate');
 const framework = require('./framework');
-const { HookAuth } = require("./framework");
+const antiAfk = require('./anti-afk')
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -19,6 +19,6 @@ const dataFilePath = 'authentication_data.json';
     } catch (error) {
         console.log('Cookies Token not found in authentication json please login');
     }
-    validate.clienrt(userData, rl, dataFilePath, framework, puppeteer, fs)
-    userData.connectSid && userData.rememberMe ? await framework.HookAuth(userData, rl, dataFilePath, framework, puppeteer, fs) : null ;
+    await validate.clienrt(userData, rl, dataFilePath, framework, puppeteer, fs)
+    userData.connectSid && userData.rememberMe ? await framework.HookAuth(userData, rl, dataFilePath, framework, puppeteer, fs, antiAfk) : null;
 })();

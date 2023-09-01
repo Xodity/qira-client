@@ -3,10 +3,10 @@ module.exports = {
         console.log('Waiting for button server to be loaded...');
         await page.waitForSelector('.btn.btn-lg.btn-success.text-ellipsis.flex-grow-1');
 
-        console.log('Client bot is ready without anti afk. Happy hacking!');
+        console.log('Client bot is ready with anti afk. Happy hacking!');
         await page.click('.btn.btn-lg.btn-success.text-ellipsis.flex-grow-1');
     },
-    HookAuth : async function (userData, rl, dataFilePath, framework, puppeteer, fs) {
+    HookAuth : async function (userData, rl, dataFilePath, framework, puppeteer, fs, antiAfk) {
 
             console.log('Data cookies founded: ' , userData);
             const client = await puppeteer.launch({
@@ -38,7 +38,7 @@ module.exports = {
             });
             await page.waitForSelector('.form-control.text-center.padded-right');
             await page.waitForTimeout(1000);
-            await page.evaluate((characterName) => {
+            await page.evaluate( () => {
                 const inputElement = document.querySelector('.form-control.text-center.padded-right');
                 inputElement.value = '';
             }, characterName);
@@ -46,6 +46,7 @@ module.exports = {
             setTimeout(() => {
                 console.log('Timeout occurred for this section of the code.');
                 framework.RunServer(page);
+                antiAfk.antiAfk(page);
             }, 5000); // Timeout duration in milliseconds
 
             fs.writeFileSync(dataFilePath, JSON.stringify(userData, null, 2));
